@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+//--------------------------------------------------------------------------------
+// Footer Style
+//--------------------------------------------------------------------------------
+
+// Desktop Width
+//--------------------------------------------------
+footer {
+	.footer__inner {
+		p {
+			text-align: center;
+			@include fontsize(12);
+			padding-bottom: 40px;
+			a {
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+// SmartPhone Width
+//--------------------------------------------------
+@media #{$smartPhone} {
+	footer {
+		.footer__inner {
+			width: 100%;
+		}
+	}
+}

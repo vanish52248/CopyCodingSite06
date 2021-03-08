@@ -1,0 +1,225 @@
+@charset "utf-8";
+
+//--------------------------------------------------------------------------------
+// Main Style
+//--------------------------------------------------------------------------------
+
+// Desktop Width
+//--------------------------------------------------
+main {
+	.main__contents__wrapper--1column {
+		max-width: 1030px;
+		width: 100%;
+		margin: 0 auto;
+		.main__title {
+			@include fontsize(22);
+			text-align: center;
+			font-family: "Josefin Sans", "Noto Sans JP", serif;
+			padding-top: 75px;
+		}
+		.main__text {
+			@include fontsize(14);
+			line-height: 27px;
+			@include lineHeightErase(27px);
+			font-family: $KakuGothic;
+			padding: 30px 0 80px;
+		}
+	}
+	.main__contents__wrapper--2column {
+		display: flex;
+		flex-wrap: wrap;
+		.main__contents--gray {
+			width: 50%;
+			background-color: #f6f6f6;
+			.main__title {
+				@include fontsize(22);
+				text-align: center;
+				font-family: "Josefin Sans", "Noto Sans JP", serif;
+				padding: 160px 0 40px;
+			}
+			.main__text {
+				@include fontsize(14);
+				line-height: 27px;
+				@include lineHeightErase(27px);
+				font-family: $KakuGothic;
+				color: $text_color;
+				margin: 0 auto;
+				max-width: 680px;
+			}
+		}
+		.main__icon {
+			width: 50%;
+			&:first-of-type {
+				order: -1;
+				// 最初の要素を記事と逆にする値
+			}
+		}
+	}
+	.main__contents__wrapper--3column {
+		display: flex;
+		justify-content: space-between;
+		max-width: 980px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 70px 0 120px;
+		.main__contents--white {
+			max-width: 300px;
+			.main__title {
+				@include fontsize(22);
+				font-family: "Josefin Sans", "Noto Sans JP", serif;
+				text-align: center;
+				padding-bottom: 20px;
+			}
+			.main__icon--circle {
+				width: 300px;
+				height: 300px;
+			}
+			.main__text {
+				@include fontsize(14);
+				line-height: 27px;
+				@include lineHeightErase(27px);
+				font-family: $KakuGothic;
+				color: $text_color;
+				padding-top: 20px;
+			}
+		}
+	}
+	.main__contents__wrapper--bgfix {
+		background-image: url(images/bgSec04.jpg);
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: right;
+		.main__contents__wrapper--box {
+			display: flex;
+			justify-content: space-between;
+			margin: 0 auto;
+			max-width: 900px;
+			width: 100%;
+			color: $base_color;
+			.main__contents {
+				max-width: 415px;
+				width: 100%;
+				.main__title {
+					@include fontsize(22);
+					font-family: "Josefin Sans", "Noto Sans JP", serif;
+					padding: 95px 0 30px;
+					text-align: center;
+				}
+				.main__text {
+					@include fontsize(14);
+					line-height: 27px;
+					@include lineHeightErase(27px);
+					font-family: $KakuGothic;
+					padding-bottom: 140px;
+				}
+			}
+		}
+	}
+	.main__contents-access {
+		display: flex;
+		justify-content: center;
+		padding: 140px;
+		.main__contents-info {
+			@include fontsize(14);
+			font-family: $KakuGothic;
+			color: $text_color;
+			padding-right: 50px;
+			max-width: 400px;
+			width: 100%;
+			dl {
+				display: flex;
+				dt {
+					max-width: 70px;
+					width: 100%;
+					text-align: right;
+				}
+				dd {
+					max-width: 400px;
+					width: 100%;
+					padding: 0 0 30px 30px;
+				}
+			}
+		}
+	}
+}
+// SmartPhone Width
+//--------------------------------------------------
+@media #{$smartPhone} {
+	main {
+		.main__inner {
+			.main__contents__wrapper--1column {
+				.main__text {
+					width: 100%;
+					max-width: 450px;
+					margin: 0 auto;
+				}
+			}
+			.main__contents__wrapper--2column {
+				.main__contents--gray {
+					width: 100%;
+					.main__title {
+						padding: 50px 0 40px;
+					}
+				}
+				.main__text {
+					max-width: 730px;
+					padding-bottom: 50px;
+				}
+			}
+			.main__icon {
+				width: auto;
+				order: -1;
+				// 縦並びの時に写真>記事>写真>記事に並び替え
+				&:first-of-type {
+					order: 0;
+					// 最初の要素を記事と逆にする値を元に戻す
+				}
+			}
+			.main__contents__wrapper--3column {
+				display: block;
+				padding-bottom: 0;
+				.main__contents--white {
+					margin: 0 auto;
+					.main__text {
+						padding-bottom: 50px;
+					}
+				}
+			}
+			.main__contents__wrapper--bgfix {
+				.main__contents__wrapper--box {
+					justify-content: space-around;
+					.main__contents {
+						max-width: none;
+						width: auto;
+						.main__title {
+							max-width: 280px;
+						}
+						.main__text {
+							max-width: 280px;
+							padding-bottom: 80px;
+						}
+					}
+				}
+			}
+			.main__contents-access {
+				padding: 65px 90px;
+				.main__contents-map {
+					position: relative;
+					padding: 110px 140px; // それぞれ*2で縦横比
+					height: 0;
+					overflow: hidden;
+					iframe {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100% !important;
+						height: 100% !important;
+						// map埋め込みをレスポンシブでサイズ変更する際は
+						// 親要素に padding（縦横指定）/relative/overflow hidden/height 0;
+						// を指定し、子要素に縦横100%とabsolute
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,193 @@
+@charset "utf-8";
+
+//--------------------------------------------------------------------------------
+// Header Style
+//--------------------------------------------------------------------------------
+
+// Desktop Width
+//--------------------------------------------------
+header {
+	.header__inner {
+		position: relative;
+		.header__title {
+			h1 {
+				position: absolute;
+				top: 46%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				color: $h1_color;
+				&:first-of-type {
+					@include fontsize(40);
+					font-family: "Pacifico", cursive;
+					font-weight: bold;
+				}
+				&:nth-of-type(2) {
+					@include fontsize(20);
+					font-family: $YuMincho;
+					padding-top: 100px;
+				}
+			}
+		}
+		p {
+			max-width: $pcContentsWidth;
+			margin: 0 auto;
+		}
+		nav {
+			ul {
+				display: flex;
+				position: fixed;
+				right: 0;
+				top: 0;
+				font-family: $KakuGothic;
+				margin: 50px 40px 0 0;
+				li {
+					padding-left: 25px;
+				}
+				a {
+					@include fontsize(14);
+					color: $text_color;
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
+.active {
+	// nav固定メニューのスクロール時のアニメーションクラス
+	justify-content: flex-end;
+	align-items: center;
+	background-color: #fff;
+	border-bottom: #d1d1d1 1px solid;
+	opacity: 0.9;
+	// jsでスクロールしたときに変える色
+	width: 100%;
+	height: 70px;
+	z-index: 100;
+	padding-right: 40px;
+	margin: 0 !important;
+	// !important で優先度上げてcssあてるようにしている
+}
+.anchor {
+	// 上に余白を入れて、ネガティブマージンで見た目上は
+	// キャンセルすると、ページ内リンクでの移動先を少し上にすることができる。
+	display: block;
+	padding-top: 70px;
+	margin-top: -70px;
+}
+
+// SmartPhone Width
+//--------------------------------------------------
+@media #{$smartPhone} {
+	.active {
+		justify-content: initial;
+		height: initial;
+		background-color: initial;
+		border-bottom: none;
+		margin: 50px 40px 0 0 !important;
+		//nav固定メニューのスクロール時のアニメーションクラスの打消しのクラスを入力
+	}
+
+	// ここからハンバーガーメニューの記述
+	header {
+		.header__inner {
+			justify-content: center;
+			.header__title {
+				h1 {
+					&:first-of-type {
+						@include fontsize(31);
+					}
+					&:nth-of-type(2) {
+						@include fontsize(16);
+					}
+				}
+			}
+			nav {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				left: 0;
+				visibility: hidden;
+				opacity: 0;
+				transition: 0.5s;
+				background-color: rgba(0, 0, 0, 0.5);
+				ul {
+					position: absolute;
+					top: 50%;
+					right: auto;
+					//通常必要ない
+					transform: translateY(-50%);
+					flex-direction: column;
+					align-items: flex-start;
+					li {
+						margin: 20px;
+						a {
+							font-size: 20px;
+							color: white;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.btn-trigger {
+	position: absolute;
+	top: 50px;
+	right: 20px;
+	width: 34px;
+	height: 28px;
+	transform: translateY(-50%);
+	cursor: pointer;
+	span {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 4px;
+		background-color: #383838;
+		border-radius: 4px;
+		&:nth-of-type(1) {
+			top: 0px;
+		}
+		&:nth-of-type(2) {
+			top: 12px;
+		}
+		&:nth-of-type(3) {
+			bottom: 0px;
+		}
+	}
+}
+.btn-trigger,
+.btn-trigger span {
+	display: inline-block;
+	position: fixed;
+	transition: all 0.5s;
+	box-sizing: border-box;
+}
+.btn__active {
+	span {
+		background-color: #fff;
+		&:nth-of-type(1) {
+			transform: translateY(12px) rotate(-45deg);
+			top: 0;
+		}
+		&:nth-of-type(2) {
+			top: 12px;
+			left: 50%;
+			opacity: 0;
+			animation: active-btn-bar02 0.8s forwards;
+		}
+		&:nth-of-type(3) {
+			bottom: 0;
+			transform: translateY(-12px) rotate(45deg);
+		}
+	}
+}
+
+@media (min-width: 769px) {
+	.btn-trigger {
+		display: none;
+	}
+}
